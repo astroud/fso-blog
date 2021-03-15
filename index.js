@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const config = require('./utils/config')
 
 const blogSchema = new mongoose.Schema({
   title: String,
@@ -14,7 +15,7 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = 'mongodb://localhost/bloglist'
+const mongoUrl = config.MONGODB_URI
 mongoose.connect(mongoUrl, {
   useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true,
 })
@@ -23,7 +24,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (request, response) => {
-  response.send('Hi, I\'m the blog\'s Back End! Are you looking for the /api/blogs route?')
+  response.send('Hi, I\'m the blog\'s Back End! Are you looking for the <a href="/api/blogs">/api/blogs</a> route?')
 })
 
 app.get('/api/blogs', (request, response) => {
