@@ -1,0 +1,13 @@
+GET http://localhost:3003/api/blogs/ HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:3003/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+  "title": "{{$randomInt 3 100}} Ways To Be A Dev Ninja",
+  "author": "Author Unknown",
+  "url": "https://valuableDomain.com/{{$randomInt 1000 10000}}",
+  "likes": 1
+}
