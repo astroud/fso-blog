@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // eslint-disable-next-line no-unused-vars
 const dummy = (blogs) => 1
 
@@ -21,7 +22,6 @@ const mostBlogs = (blogs) => {
   const authors = []
   blogs.forEach((blog) => authors.push(blog.author))
 
-  /* eslint-disable no-param-reassign */
   const getTotals = (allAuthors, author) => {
     if (allAuthors[author]) {
       allAuthors[author] += 1
@@ -30,7 +30,6 @@ const mostBlogs = (blogs) => {
     }
     return allAuthors
   }
-  /* eslint-enable no-param-reassign */
 
   const authorTotals = authors.reduce(getTotals, {})
 
@@ -44,6 +43,31 @@ const mostBlogs = (blogs) => {
   })
 }
 
+const mostLikes = (blogs) => {
+  // Return object with author names as properties and
+  // their total # of likes as the value
+  const getTotalLikes = (likesByAuthor, blog) => {
+    if (likesByAuthor[blog.author]) {
+      likesByAuthor[blog.author] += blog.likes
+    } else {
+      likesByAuthor[blog.author] = blog.likes
+    }
+    return likesByAuthor
+  }
+
+  // Returns array containing author with most likes
+  // ['author name', numOfLikes]
+  const findMost = (authors) => {
+    const max = Math.max(...Object.values(authors))
+    return Object.entries(authors).filter((a) => a[1] === max)[0]
+  }
+
+  const totaledLikes = blogs.reduce(getTotalLikes, {})
+  const match = findMost(totaledLikes)
+
+  return { author: match[0], likes: match[1] }
+}
+
 module.exports = {
-  dummy, totalLikes, favoriteBlog, mostBlogs,
+  dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes,
 }

@@ -162,4 +162,14 @@ describe('favoriteBlog', () => {
     const result = listHelper.favoriteBlog(blogs)
     expect(result).toEqual(mostPopular)
   })
+
+  test('returns author and likes total for author with mostLikes', () => {
+    const mostLiked = {
+      author: 'Edsger W. Dijkstra',
+      likes: 17,
+    }
+
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual(mostLiked)
+  })
 })
